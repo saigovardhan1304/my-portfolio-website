@@ -429,57 +429,55 @@
     </footer>
 
     <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+           // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Smooth scrolling for navigation
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+    // Smooth scrolling for navigation
+    function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
         }
+    }
 
-        // Highlight active navigation link based on scroll position
-        const sections = document.querySelectorAll('section');
-        const navButtons = document.querySelectorAll('nav button');
+    // Highlight active navigation link based on scroll position
+    const sections = document.querySelectorAll('section');
+    const navButtons = document.querySelectorAll('nav button');
 
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.7,
-        };
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.7,
+    };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navButtons.forEach(button => {
-                        button.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
-                        button.classList.add('text-gray-300', 'hover:bg-gray-700', 'hover:text-indigo-400');
-                    });
-                    const activeSectionId = entry.target.id;
-                    const activeButton = document.querySelector(`nav button[data-section="${activeSectionId}"]`);
-                    if (activeButton) {
-                        activeButton.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
-                        activeButton.classList.remove('text-gray-300', 'hover:bg-gray-700', 'hover:text-indigo-400');
-                    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navButtons.forEach(button => {
+                    button.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                    button.classList.add('text-gray-300', 'hover:bg-gray-700', 'hover:text-indigo-400');
+                });
+                const activeSectionId = entry.target.id;
+                const activeButton = document.querySelector(`nav button[data-section="${activeSectionId}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+                    activeButton.classList.remove('text-gray-300', 'hover:bg-gray-700', 'hover:text-indigo-400');
                 }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-
-        // Three.js 3D Photo Logic (Simplified for plain JS)
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('threeDPhotoContainer');
-            if (!container) {
-                console.error('3D photo container not found!');
-                return;
             }
+        });
+    }, observerOptions);
 
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // Three.js 3D Photo Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('threeDPhotoContainer');
+        if (!container) {
+            console.error('3D photo container not found!');
+            return;
+        }
             // Using a generic placeholder URL.
             // If you want to use your specific photo, you'll need to host it on a publicly accessible
             // image hosting service that allows CORS (e.g., Imgur, your own web server with proper CORS headers)
